@@ -1,0 +1,310 @@
+# Table of Contents / 目次
+
+- [Overview / 概要](#overview--概要)
+- [Photos / 写真](#photos--写真)
+- [How the System Works / 動作概要](#how-the-system-works--動作概要)
+- [Hardware / ハードウェア構成](#hardware--ハードウェア構成)
+- [Before You Start / 事前準備](#before-you-start--事前準備)
+- [Installation / インストール方法](#installation--インストール方法)
+- [Credits / クレジット](#credits--クレジット)
+- [Disclaimer / 免責事項](#disclaimer--免責事項)
+- [License / ライセンス](#license--ライセンス)
+
+# Overview / 概要
+
+This project is a weather forecast display system using the [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html), showing every 3 hours forecast for the next 12 hours.
+The weather forecast data is obtained using the [OpenWeatherMap](https://openweathermap.org/) API.
+
+\[日本語\]
+
+このプロジェクトは、天気予報表示システムです。12時間後までの3時間ごとの天気予報を表示します。
+ハードウェアは [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) を使っています。
+天気予報データは、[OpenWeatherMap](https://openweathermap.org/) APIにて取得します。
+
+# Photos / 写真
+
+![crowpanel-5.79_weather-display.jpg](crowpanel-5.79_weather-display.jpg)
+
+# Motivation / 開発のきっかけ
+
+I developed this weather forecast display system for my young children.
+While we adults can easily check the weather every morning on our smartphones and prepare accordingly, young children don't have access to such tools.
+To address this, I created a weather display system that children can check on their own.
+By using an E-Paper for display, it is not only easy to read but also energy-efficient.
+
+\[日本語\]
+
+この天気予報表示システムは、私の幼い子どもたちのために開発しました。
+毎朝、大人はスマートフォンで簡単に天気を確認して、必要な準備をすることができますが、幼い子どもたちにはそうした手段がありません。
+そこで、子どもたちが自分で天気を確認できるようなシステムを作りました。
+表示に電子ペーパーを使用することで、見やすいだけでなく省電力にもなっています。
+
+# How the System Works / 動作概要
+
+The system operates as follows:
+
+1. Connects to 2.4 GHz WiFi on startup.
+1. Retrieves the current weather and forecast (3, 6, 9, and 12 hours ahead) using the [OpenWeatherMap](https://openweathermap.org/) API.
+1. Displays weather information (time, weather condition, temperature, and probability of precipitation) on the E-Paper display.
+1. Enters [Deep-sleep mode](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/sleep_modes.html) to save power.
+1. Restarts after the configured interval (default: 1 hour).
+
+\[日本語\]
+
+システムは次のように動作します。
+
+1. 起動時に2.4GHz WiFiに接続する。
+1. [OpenWeatherMap](https://openweathermap.org/) APIを使って現在の天気と予報（3時間後、6時間後、9時間後、12時間後）を取得する。
+1. 電子ペーパーに天気情報を表示する（時刻、天気、気温、降水確率）。
+1. 省電力のために [ディープスリープモード](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/sleep_modes.html) に入る。
+1. 設定された時間（デフォルト：1時間）後に再度起動する。
+
+# Hardware / ハードウェア構成
+
+- [Elecrow CrowPanel ESP32 5.79” E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
+
+    - A display module equipped with a 5.79-inch E-Paper display. The resolution is 272(H) × 792(L) pixels.
+    - The main controller is the [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3), which is certified for use in Japan. The technical conformity certification (TELEC) number is [201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist).
+    - It is housed in an acrylic enclosure.
+
+\[日本語\]
+
+- [Elecrow CrowPanel ESP32 5.79” E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
+    - 5.79インチの電子ペーパーを搭載したディスプレイモジュールです。解像度は272(H)×792(L)ピクセル。
+    - メインコントローラーは [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3) で、技適マークがあります。工事設計認証（技適/TELEC）番号は [201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist) 。
+    - アクリル板製のエンクロージャーに入っています。
+
+# Before You Start / 事前準備
+
+To retrieve weather forecast data, you need an API key of [OpenWeatherMap](https://openweathermap.org/) .
+This system uses the "[One Call API 3.0](https://openweathermap.org/api/one-call-3) ," which requires you to register a credit card along with your address and phone number.
+[This API is free for up to 1,000 times per day, but after that, you will be charged £0.12 for every 100 times](https://openweathermap.org/price) .
+However, as described below, you will set the daily request limit to 900, so it should be possible to use the service for free.
+
+1. Open the [official OpenWeatherMap website](https://openweathermap.org/).
+
+1. Click on "Sign in" at the top right corner.
+
+1. Click on "Create an Account."
+
+1. Enter your username, email address, and password. Then check the following boxes:
+
+   - "I am 16 years old and over"
+   - "I agree with Privacy Policy, Terms and conditions of sale and Websites terms and conditions of use"
+   - "I am not a robot"
+
+    Finally, click the "Create Account" button.
+
+1. A dialog titled "How and where will you use our API?" will appear.
+
+1. If you are registering as an individual, leave the "Company" field blank.
+   Select the appropriate purpose in the "Purpose" field and click the "Save" button.
+
+1. You will receive an email from "Open Weather Team" with the subject "OpenWeatherMap Account confirmation."
+
+1. Click the "Verify your email" button in the email.
+
+1. Sign in using your registered email address and password.
+
+1. Click the "API keys" tab.
+
+1. Make a note of your API key.
+
+1. Click the "Billing plans" tab.
+
+1. Under the "One Call API 3.0" section, click the "Subscribe" button for the "Base plan."
+
+1. Enter your billing information ("First name," "Last name," "Country," "Address Line 1," "Address Line 2," "City," "Postal code," "Phone") and click "Continue to payment" button.
+
+1. Enter your credit card information (via [Stripe](https://stripe.com) ).
+
+1. To avoid unintentional charges, click the pencil icon next to the "Calls per day (no more than)" field and set the value to below 1000 (I set it to 900).
+
+\[日本語\]
+
+天気情報を取得するために、 [OpenWeatherMap](https://openweathermap.org/) のAPIキーが必要です。
+本システムでは「 [One Call API 3.0](https://openweathermap.org/api/one-call-3) 」を使用するため、クレジットカードの登録と住所や電話番号の登録が必要となります。
+[このAPIは、1日1000回までは無料ですが、それを超えると、100回毎に0.12ポンド請求されます。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定しますので、無料での運用が可能と考えています。
+
+1. [OpenWeatherMapの公式サイト](https://openweathermap.org/) を開きます。
+
+1. 右上の「Sign in」をクリックします。
+
+1. 「Create an Account」をクリックします。
+
+1. ユーザー名、メールアドレス、パスワードを入力し、以下のチェックボックスを有効化します。
+
+   - 「I am 16 years old and over」
+   - 「I agree with Privacy Policy, Terms and conditions of sale and Websites terms and conditions of use」
+   - 「私はロボットではありません」
+
+    「Create Account」ボタンをクリックします。
+
+1. 「How and where will you use our API?」というダイアログが表示されます。
+
+1. 個人であれば、「Company」欄は空欄のままにします。「Purpose」欄で適切な利用目的を選択し、「Save」ボタンをクリックします。
+
+1. 「Open Weather Team」から「OpenWeatherMap Account confirmation」という件名のメールが届きます。
+
+1. メール内の「Verify your email」ボタンをクリックします。
+
+1. 登録したメールアドレスとパスワードでサインインします。
+
+1. 「API keys」タブをクリックします。
+
+1. APIキーをメモしておきます。
+
+1. 「Billing plans」タブをクリックします。
+
+1. 「One Call API 3.0」パートの「Base plan」の「Subscribe」ボタンをクリックします。
+
+1. 請求情報（「First name」、「Last name」、「Country」、「Address Line 1」、「Address Line 2」、「City」、「Postal code」、「Phone」）を入力し、「Continue to payment」ボタンをクリックします。
+
+1. クレジットカード情報を入力します（ [Stripe](https://stripe.com) 経由です）。
+
+1. 意図せず費用を請求されることを防ぐために、「Calls per day (no more than)」欄の鉛筆アイコンをクリックし、値を1000未満に設定します（私は900に設定しました）。
+
+# Installation / インストール方法
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/cubic9com/crowpanel-5.79_weather-display.git
+    cd crowpanel-5.79_weather-display
+    ```
+
+1. Install [Visual Studio Code](https://code.visualstudio.com/) if you haven't already.
+
+1. Open the project in Visual Studio Code:
+    ```sh
+    code .
+    ```
+
+1. Install `PlatformIO IDE` extension:
+    - Go to the Extensions view (`Ctrl+Shift+X`).
+    - Search for `PlatformIO IDE` and install it.
+
+1. Open PlatformIO Home:
+    - In the left Activity Bar, click the PlatformIO icon.
+    - In the left Primary Sidebar, Go to `QUICK ACCESS > PIO Home > Open`.
+
+1. Open the project:
+    - In the right Editor Groups, Click `Open Project` in the `PIO HOME` tab.
+    - Select the cloned `crowpanel-5.79_weather-display` project folder.
+
+1. Copy `config.template.h` to create a `src/config.h` file, and configure it as follows.
+    ```cpp
+    // 2.4 GHz WiFi Configurations
+    #define WIFI_SSID "your WiFi SSID"
+    #define WIFI_PASSWORD "your WiFi password"
+
+    // OpenWeatherMap API Configurations
+    #define OPENWEATHERMAP_API_KEY "your OpenWeatherMap API key"
+    #define LATITUDE 35.68130      // Latitude (e.g., Tokyo)
+    #define LONGITUDE 139.76707    // Longitude (e.g., Tokyo)
+    #define TIMEZONE_OFFSET 9      // Offset from UTC (in hours)
+
+    // Interval Configurations (minutes)
+    #define INTERVAL_IN_MINUTES 60 // 1 hour
+    ```
+    
+    Note: You can obtain the latitude and longitude from the URL after searching for the location you want to display the weather forecast for on [Google Maps](https://www.google.com/maps/) .
+
+
+1. Upload the project:
+    - In the left Primary Sidebar, go to `PROJECT TASKS > esp32-s3-devkit-1 > General > Upload`.
+
+\[日本語\]
+
+1. リポジトリをクローンします:
+    ```sh
+    git clone https://github.com/cubic9com/crowpanel-5.79_weather-display.git
+    cd crowpanel-5.79_weather-display
+    ```
+
+1. まだインストールしていない場合は、[Visual Studio Code](https://code.visualstudio.com/) をインストールします。
+
+1. Visual Studio Code でプロジェクトを開きます:
+    ```sh
+    code .
+    ```
+
+1. `PlatformIO IDE` 拡張機能をインストールします:
+    - 左サイドバーの「拡張機能」ビュー (`Ctrl+Shift+X`) を開きます。
+    - `PlatformIO IDE` を検索してインストールします。
+
+1. PlatformIO Home を開きます:
+    - 左のアクティビティバーで PlatformIO アイコンをクリックします。
+    - 左のメインサイドバーから `QUICK ACCESS > PIO Home > Open` を選択します。
+
+1. プロジェクトを開きます:
+    - 右のエディターグループ内の `PIO HOME` タブで `Open Project` をクリックします。
+    - クローンした `crowpanel-5.79_weather-display` プロジェクトフォルダーを選択します。
+
+1. `config.template.h`をコピーして、 `src/config.h`ファイルを作り、以下の設定をします。
+    ```cpp
+    // 2.4 GHz WiFi設定
+    #define WIFI_SSID "あなたのWiFi SSID"
+    #define WIFI_PASSWORD "あなたのWiFiパスワード"
+
+    // OpenWeatherMap API設定
+    #define OPENWEATHERMAP_API_KEY "あなたのOpenWeatherMap APIキー"
+    #define LATITUDE 35.68130      // 緯度（例：東京）
+    #define LONGITUDE 139.76707    // 経度（例：東京）
+    #define TIMEZONE_OFFSET 9      // UTCからのオフセット（時間）
+
+    // 更新間隔設定（分）
+    #define INTERVAL_IN_MINUTES 60  // 1時間
+    ```
+
+    なお、緯度と経度は [Googleマップ](https://www.google.com/maps/) で天気予報を表示したい地点を検索した後のURLから取得できます。
+
+1. プロジェクトをアップロードします:
+    - 左のメインサイドバーから `PROJECT TASKS > esp32-s3-devkit-1 > General > Upload` を選択します。
+
+# Credits / クレジット
+
+- This program was developed based on the [Arduino demo program of the Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) .
+- The weather forecast data is provided by [OpenWeather](https://openweathermap.org/) .
+- The weather icons are from the [Meteocons set by basmilius](https://github.com/basmilius/weather-icons) , licensed under the MIT License.
+- The font is the [Chivo Mono font by Omnibus-Type](https://fonts.google.com/specimen/Chivo+Mono) , licensed under the SIL Open Font License, Version 1.1.
+
+\[日本語\]
+
+- このプログラムは、 [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch DisplayのArduino用デモプログラム](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) をベースに開発しました。
+- 天気予報情報は [OpenWeather](https://openweathermap.org/) によって提供されたものです。
+- 天気アイコンは [basmilius様のMeteocons](https://github.com/basmilius/weather-icons) を、MITライセンスの下で使用しています。
+- フォントは [Omnibus-Type様のChivo Monoフォント](https://fonts.google.com/specimen/Chivo+Mono) を、SIL Open Font License, Version 1.1の下で使用しています。
+
+# Disclaimer / 免責事項
+
+This project is provided for educational and personal use only. The author makes no guarantees regarding the accuracy, reliability, or continued availability of the system or any third-party services it depends on.
+
+Use this project at your own risk. The author shall not be held liable for any damage, data loss, costs, or consequences arising from the use of this software, including but not limited to:
+
+* Misuse or misconfiguration of the system
+* API limitations or changes (e.g., from [OpenWeatherMap](https://openweathermap.org/))
+* Hardware malfunctions
+* Network failures
+
+By using this project, you agree to assume full responsibility for any and all outcomes.
+
+\[日本語\]
+
+本プロジェクトは、教育目的および個人利用を想定して提供されます。システムおよび依存する外部サービスの正確性、信頼性、継続的な提供について、作者は一切の保証を行いません。
+
+本ソフトウェアの使用は自己責任でおこってください。著者は、以下を含む本ソフトウェアの使用により生じたいかなる損害、データの損失、費用、その他の結果についても責任を負いません：
+
+* システムの誤使用や設定ミス
+* [OpenWeatherMap](https://openweathermap.org/) など外部APIの制限や仕様変更
+* ハードウェアの不具合
+* ネットワークの障害
+
+本プロジェクトを利用することで、すべてのリスクと結果に対する責任をユーザー自身が負うことに同意したものとみなされます。
+
+# License / ライセンス
+
+Copyright (C) 2025, cubic9com All rights reserved.
+
+This project is licensed under the MIT license.
+
+See file `LICENSE` file for details.
