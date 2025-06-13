@@ -12,8 +12,8 @@
 
 # Overview / 概要
 
-This project is a weather forecast display system using the [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html), showing every 3 hours forecast for the next 12 hours.
-The weather forecast data is obtained using the [OpenWeatherMap](https://openweathermap.org/) API.
+This project is a weather forecast display system using [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html), showing every 3-hour forecast for the next 12 hours.
+The weather forecast data is obtained using [OpenWeatherMap](https://openweathermap.org/) API.
 
 \[日本語\]
 
@@ -44,7 +44,7 @@ By using an E-Paper for display, it is not only easy to read but also energy-eff
 The system operates as follows:
 
 1. Connects to 2.4 GHz WiFi on startup.
-1. Retrieves the current weather and forecast (3, 6, 9, and 12 hours ahead) using the [OpenWeatherMap](https://openweathermap.org/) API.
+1. Retrieves the current weather and forecast (3, 6, 9, and 12 hours ahead) using [OpenWeatherMap](https://openweathermap.org/) API.
 1. Displays weather information (time, weather condition, temperature, and probability of precipitation) on the E-Paper display.
 1. Enters [Deep-sleep mode](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/sleep_modes.html) to save power.
 1. Restarts after the configured interval (default: 1 hour).
@@ -63,8 +63,8 @@ The system operates as follows:
 
 - [Elecrow CrowPanel ESP32 5.79” E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
 
-    - A display module equipped with a 5.79-inch E-Paper display. The resolution is 272(H) × 792(L) pixels.
-    - The main controller is the [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3). It is certified under FCC ID [2AC7Z ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1), CE compliant under the RED directive, and has obtained Japan’s TELEC certification with the number [R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist).
+    - A display module equipped with a 5.79-inch E-Paper display. The display has a resolution of 272(H) × 792(L) pixels.
+    - Its main controller is [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3). It is certified under FCC ID [2AC7Z ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1), CE compliant under the RED directive, and has obtained Japan’s TELEC certification with the number [R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist).
     - It is housed in an acrylic enclosure.
 
 \[日本語\]
@@ -77,8 +77,8 @@ The system operates as follows:
 # Before You Start / 事前準備
 
 To retrieve weather forecast data, you need an API key of [OpenWeatherMap](https://openweathermap.org/) .
-This system uses the "[One Call API 3.0](https://openweathermap.org/api/one-call-3) ," which requires you to register a credit card along with your address and phone number.
-[This API is free for up to 1,000 times per day, but after that, you will be charged £0.12 for every 100 times](https://openweathermap.org/price) .
+This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), which requires registering a credit card, along with your address and phone number.
+[This API is free for up to 1,000 calls per day, but after that, you will be charged £0.12 for every 100 times](https://openweathermap.org/price) .
 However, as described below, you will set the daily request limit to 900, so it should be possible to use the service for free.
 
 1. Open the [official OpenWeatherMap website](https://openweathermap.org/).
@@ -114,7 +114,7 @@ However, as described below, you will set the daily request limit to 900, so it 
 
 1. Under the "One Call API 3.0" section, click the "Subscribe" button for the "Base plan."
 
-1. Enter your billing information ("First name," "Last name," "Country," "Address Line 1," "Address Line 2," "City," "Postal code," "Phone") and click "Continue to payment" button.
+1. Enter your billing information (First name, Last name, Country, Address Line 1, Address Line 2, City, Postal code, and Phone) and click "Continue to payment" button.
 
 1. Enter your credit card information (via [Stripe](https://stripe.com) ).
 
@@ -263,10 +263,10 @@ However, as described below, you will set the daily request limit to 900, so it 
 
 # Credits / クレジット
 
-- This program was developed based on the [Arduino demo program of the Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) .
+- This program was developed based on the [Arduino demo program of Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) .
 - The weather forecast data is provided by [OpenWeather](https://openweathermap.org/) .
-- The weather icons are from the [Meteocons set by basmilius](https://github.com/basmilius/weather-icons) , licensed under the MIT License.
-- The font is the [Chivo Mono font by Omnibus-Type](https://fonts.google.com/specimen/Chivo+Mono) , licensed under the SIL Open Font License, Version 1.1.
+- The weather icons are from [Meteocons set by basmilius](https://github.com/basmilius/weather-icons) , licensed under the MIT License.
+- The font is [Chivo Mono font by Omnibus-Type](https://fonts.google.com/specimen/Chivo+Mono) , licensed under the SIL Open Font License, Version 1.1.
 
 \[日本語\]
 
