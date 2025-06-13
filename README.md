@@ -64,14 +64,14 @@ The system operates as follows:
 - [Elecrow CrowPanel ESP32 5.79” E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
 
     - A display module equipped with a 5.79-inch E-Paper display. The resolution is 272(H) × 792(L) pixels.
-    - The main controller is the [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3), which is certified for use in Japan. The technical conformity certification (TELEC) number is [201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist).
+    - The main controller is the [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3). It is certified under FCC ID [2AC7Z ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1), CE compliant under the RED directive, and has obtained Japan’s TELEC certification with the number [R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist).
     - It is housed in an acrylic enclosure.
 
 \[日本語\]
 
 - [Elecrow CrowPanel ESP32 5.79” E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
     - 5.79インチの電子ペーパーを搭載したディスプレイモジュールです。解像度は272(H)×792(L)ピクセル。
-    - メインコントローラーは [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3) で、技適マークがあります。工事設計認証（技適/TELEC）番号は [201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist) 。
+    - メインコントローラーは [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3) です。FCC ID「[2AC7Z ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1)」 の認証を取得しており、RED指令に基づくCE適合、および日本の技術基準適合認証（技適/TELEC）番号「[R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist)」を取得しています。
     - アクリル板製のエンクロージャーに入っています。
 
 # Before You Start / 事前準備
