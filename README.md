@@ -266,14 +266,14 @@ However, by setting the daily request limit to 900, as described below, you shou
 
 - This program was developed based on the [Arduino demo for Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather).
 - The weather forecast data is provided by [OpenWeatherMap](https://openweathermap.org/).
-- The weather icons are from [Meteocons set by basmilius](https://github.com/basmilius/weather-icons), licensed under the MIT License.
+- The weather icons are from [Easy Weather Icons Font set by boxbot6](https://github.com/boxbot6/easy-weather-icons-font), licensed under the MIT License.
 - The font is [Chivo Mono by Omnibus-Type](https://fonts.google.com/specimen/Chivo+Mono), licensed under the SIL Open Font License, Version 1.1.
 
 \[日本語\]
 
 - このプログラムは、 [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch DisplayのArduino用デモプログラム](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) をベースに開発しました。
 - 天気予報情報は [OpenWeatherMap](https://openweathermap.org/) によって提供されたものです。
-- 天気アイコンは [basmilius様のMeteocons](https://github.com/basmilius/weather-icons) を、MITライセンスの下で使用しています。
+- 天気アイコンは [boxbot6様のEasy Weather Icons Font set](https://github.com/boxbot6/easy-weather-icons-font) を、MITライセンスの下で使用しています。
 - フォントは [Omnibus-Type様のChivo Mono](https://fonts.google.com/specimen/Chivo+Mono) を、SIL Open Font License, Version 1.1の下で使用しています。
 
 # Disclaimer / 免責事項

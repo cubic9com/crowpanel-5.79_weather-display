@@ -49,15 +49,11 @@
 enum WeatherIconNumber {
   ICON_CLEAR_DAY = 0,
   ICON_CLEAR_NIGHT = 1,
-  ICON_FEW_CLOUDS_DAY = 2,
-  ICON_FEW_CLOUDS_NIGHT = 3,
-  ICON_CLOUDS = 4,
-  ICON_BROKEN_CLOUDS = 5,
-  ICON_SHOWER_RAIN = 6,
-  ICON_RAIN = 7,
-  ICON_THUNDERSTORM = 8,
-  ICON_SNOW = 9,
-  ICON_MIST = 10
+  ICON_CLOUDS = 2,
+  ICON_RAIN = 3,
+  ICON_THUNDERSTORM = 4,
+  ICON_SNOW = 5,
+  ICON_MIST = 6
 };
 
 /**
@@ -90,14 +86,14 @@ struct ForecastInfo {
 const WeatherMapping WEATHER_MAPPINGS[] = {
   {"01d", ICON_CLEAR_DAY},
   {"01n", ICON_CLEAR_NIGHT},
-  {"02d", ICON_FEW_CLOUDS_DAY},
-  {"02n", ICON_FEW_CLOUDS_NIGHT},
+  {"02d", ICON_CLOUDS},
+  {"02n", ICON_CLOUDS},
   {"03d", ICON_CLOUDS},
   {"03n", ICON_CLOUDS},
-  {"04d", ICON_BROKEN_CLOUDS},
-  {"04n", ICON_BROKEN_CLOUDS},
-  {"09d", ICON_SHOWER_RAIN},
-  {"09n", ICON_SHOWER_RAIN},
+  {"04d", ICON_CLOUDS},
+  {"04n", ICON_CLOUDS},
+  {"09d", ICON_RAIN},
+  {"09n", ICON_RAIN},
   {"10d", ICON_RAIN},
   {"10n", ICON_RAIN},
   {"11d", ICON_THUNDERSTORM},
