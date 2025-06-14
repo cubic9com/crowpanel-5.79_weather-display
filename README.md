@@ -80,7 +80,7 @@ The system operates as follows:
 To retrieve weather forecast data, you need an API key from [OpenWeatherMap](https://openweathermap.org/).
 This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), which requires registering a credit card, along with your address and phone number.
 [This API is free for up to 1,000 calls per day; beyond that, a charge of £0.12 is incurred for each additional 100 calls](https://openweathermap.org/price).
-However, by setting the daily request limit to 900, as described below, you should be able to use the service for free. If you exceed the daily limit, you'll get HTTP response status code 429 (see the FAQ `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`).
+However, by setting the daily request limit to 900, as described below, you should be able to use the service for free. If you exceed the daily limit, you'll get HTTP response status code 429 (see the [FAQ](https://openweathermap.org/faq) `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`).
 
 1. Open the [official OpenWeatherMap website](https://openweathermap.org/).
 
