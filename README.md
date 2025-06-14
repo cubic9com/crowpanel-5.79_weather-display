@@ -80,7 +80,7 @@ The system operates as follows:
 To retrieve weather forecast data, you need an API key from [OpenWeatherMap](https://openweathermap.org/).
 This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), which requires registering a credit card, along with your address and phone number.
 [This API is free for up to 1,000 calls per day; beyond that, a charge of £0.12 is incurred for each additional 100 calls](https://openweathermap.org/price).
-However, by setting the daily request limit to 900, as described below, you should be able to use the service for free.
+However, by setting the daily request limit to 900, as described below, you should be able to use the service for free. If you exceed the daily limit, you'll get HTTP response status code 429 (see the FAQ `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`).
 
 1. Open the [official OpenWeatherMap website](https://openweathermap.org/).
 
@@ -119,13 +119,13 @@ However, by setting the daily request limit to 900, as described below, you shou
 
 1. Enter your credit card information (through [Stripe](https://stripe.com)).
 
-1. To avoid unexpected charges, click the pencil icon beside the "Calls per day (no more than)" field and set the value to less than 1000 (I set it to 900).
+1. To avoid unexpected charges, click the pencil icon beside the "Calls per day (no more than)" field and set the value to less than 1,000 (I set it to 900).
 
 \[日本語\]
 
-天気情報を取得するために、 [OpenWeatherMap](https://openweathermap.org/) のAPIキーが必要です。
-本システムでは「 [One Call API 3.0](https://openweathermap.org/api/one-call-3) 」を使用するため、クレジットカードの登録と住所や電話番号の登録が必要です。
-[このAPIは、1日1000回までは無料ですが、それを超えた場合、100回毎に0.12ポンド請求されます。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定しますので、無料での運用が可能と考えています。
+天気予報情報を取得するために、 [OpenWeatherMap](https://openweathermap.org/) のAPIキーが必要です。
+本システムでは「 [One Call API 3.0](https://openweathermap.org/api/one-call-3) 」を使用するため、クレジットカードと住所・電話番号を登録する必要があります。
+[このAPIは、1日1000回までは無料ですが、それを超えた場合、100回毎に0.12ポンド請求されます。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定しますので、無料での運用が可能と考えています。もし1日の実行回数を超えた場合は、HTTPレスポンスステータスコード429が返却されます（[FAQ](https://openweathermap.org/faq) の `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`を参照のこと）。
 
 1. [OpenWeatherMapの公式サイト](https://openweathermap.org/) を開きます。
 
@@ -265,14 +265,14 @@ However, by setting the daily request limit to 900, as described below, you shou
 # Credits / クレジット
 
 - This program was developed based on the [Arduino demo for Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather).
-- The weather forecast data is provided by [OpenWeatherMap](https://openweathermap.org/).
+- Weather data provided by [OpenWeather](https://openweathermap.org/).
 - The weather icons are from [Easy Weather Icons Font set by boxbot6](https://github.com/boxbot6/easy-weather-icons-font), licensed under the MIT License.
 - The font is [Chivo Mono by Omnibus-Type](https://fonts.google.com/specimen/Chivo+Mono), licensed under the SIL Open Font License, Version 1.1.
 
 \[日本語\]
 
 - このプログラムは、 [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch DisplayのArduino用デモプログラム](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) をベースに開発しました。
-- 天気予報情報は [OpenWeatherMap](https://openweathermap.org/) によって提供されたものです。
+- 天気予報情報は [OpenWeather](https://openweathermap.org/) によって提供されたものです。
 - 天気アイコンは [boxbot6様のEasy Weather Icons Font set](https://github.com/boxbot6/easy-weather-icons-font) を、MITライセンスの下で使用しています。
 - フォントは [Omnibus-Type様のChivo Mono](https://fonts.google.com/specimen/Chivo+Mono) を、SIL Open Font License, Version 1.1の下で使用しています。
 

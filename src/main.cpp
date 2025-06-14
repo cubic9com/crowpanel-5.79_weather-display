@@ -16,27 +16,17 @@
 #include "../test/testdata.h" // data for offline test
 
 //=============================================================================
-// Configuration Constants
+// Constants
 //=============================================================================
 
 // Test Settings
-#define TEST_MODE            false // Test mode (uses test data instead of the API when set to true)
+const bool TEST_MODE = false;      // Test mode (uses test data instead of the API when set to true)
 
 // Display Settings
-#define FORECAST_COUNT       5     // Number of forecast periods to display
-#define COLUMN_WIDTH         158   // Width of each forecast column in pixels
-#define TEXT_BUFFER_SIZE     40    // Size of text buffer for formatting
+const size_t FORECAST_COUNT = 5;   // Number of forecast periods to display
 
 // E-Paper Settings
-#define EPD_POWER_PIN        7     // GPIO pin for E-Paper power control
-#define EPD_BUFFER_SIZE      27200 // Size of E-Paper display buffer
-
-// Network Settings
-#define HTTP_TIMEOUT_MS      10000 // HTTP request timeout in milliseconds
-#define MAX_RETRY_COUNT      3     // Maximum number of retry attempts
-
-// Power Management Settings
-#define DEEP_SLEEP_PIN       GPIO_NUM_33 // GPIO pin for deep sleep wakeup
+const int EPD_BUFFER_SIZE = 27200; // Size of E-Paper display buffer
 
 //=============================================================================
 // Type Definitions
@@ -104,7 +94,7 @@ const WeatherMapping WEATHER_MAPPINGS[] = {
   {"50n", ICON_MIST}
 };
 
-#define WEATHER_MAPPINGS_COUNT (sizeof(WEATHER_MAPPINGS) / sizeof(WeatherMapping))
+const size_t WEATHER_MAPPINGS_COUNT = sizeof(WEATHER_MAPPINGS) / sizeof(WeatherMapping);
 
 //=============================================================================
 // Global Variables
@@ -127,8 +117,10 @@ ForecastInfo hourlyForecasts[FORECAST_COUNT];
 
 /**
  * Function to Enter Deep-Sleep Mode
+ * 
+ * @param wakeup true if it needs to wake up later
  */
-void enterDeepSleep() {
+void enterDeepSleep(bool wakeup) {
   Serial.println("Entering Deep-sleep mode. Will wake up later.");
   Serial.flush();
   
@@ -137,8 +129,11 @@ void enterDeepSleep() {
 
   delay(4000);
   
-  // Enter Deep-Sleep Mode (Wake Up After n minutes)
-  esp_sleep_enable_timer_wakeup(INTERVAL_IN_MINUTES * 60UL * 1000UL * 1000); // microseconds
+  // Enter Deep-Sleep Mode
+  if (wakeup) {
+    // Wake Up After n minutes (default: 60 minites)
+    esp_sleep_enable_timer_wakeup(INTERVAL_IN_MINUTES * 60UL * 1000UL * 1000); // microseconds
+  }
   esp_deep_sleep_start();
 }
 
@@ -154,7 +149,9 @@ void enterDeepSleep() {
  */
 void displayWeatherForecast()
 {
-  char buffer[TEXT_BUFFER_SIZE];
+  const int textBufferSize = 40;    // Size of text buffer for formatting
+  const int columnWidth = 158;      // Width of each forecast column in pixels
+  char buffer[textBufferSize];
 
   // Initialize Display
   Paint_NewImage(ImageBW, EPD_W, EPD_H, Rotation, WHITE);
@@ -168,7 +165,7 @@ void displayWeatherForecast()
   for (int i = 0; i < FORECAST_COUNT; i++) {
     if (hourlyForecasts[i].time.length() > 0) {
       // Calculate x position for this column
-      int baseX = COLUMN_WIDTH * i;
+      int baseX = columnWidth * i;
       
       // Display Time
       memset(buffer, 0, sizeof(buffer));
@@ -200,7 +197,7 @@ void displayWeatherForecast()
 
   // Draw Separator Lines
   for (int i = 1; i < FORECAST_COUNT; i++) {
-    EPD_DrawLine(2 + COLUMN_WIDTH * i, 0, 2 + COLUMN_WIDTH * i, 271, BLACK);
+    EPD_DrawLine(2 + columnWidth * i, 0, 2 + columnWidth * i, 271, BLACK);
   }
 
   // Update Display
@@ -216,6 +213,9 @@ void displayWeatherForecast()
  * @param message Error message to display
  */
 void displayErrorMessage(const char* message) {
+  Serial.print("ERROR: ");
+  Serial.println(message);
+
   // Initialize Display
   Paint_NewImage(ImageBW, EPD_W, EPD_H, Rotation, WHITE);
   Paint_Clear(WHITE);
@@ -225,15 +225,39 @@ void displayErrorMessage(const char* message) {
   EPD_Clear_R26A6H();
 
   // Display Error Message
-  EPD_ShowString(30, 30, "Error:", 24, BLACK);
-  EPD_ShowString(30, 70, (char*)message, 12, BLACK);
+  EPD_ShowString(30, 30, "ERROR:", 24, BLACK);
+  
+  // Process to add line breaks every 56 characters
+  const int maxCharsPerLine = 56;
+  const int lineHeight = 30;
+  int currentLine = 0;
+  int messageLength = strlen(message);
+  int startPos = 0;
+  
+  while (startPos < messageLength) {
+    char lineBuffer[maxCharsPerLine + 1];
+    int charsToDisplay = messageLength - startPos;
+    
+    // Determine the number of characters to display in this line (maximum 56)
+    if (charsToDisplay > maxCharsPerLine) {
+      charsToDisplay = maxCharsPerLine;
+    }
+    
+    // Copy the line text to buffer
+    strncpy(lineBuffer, message + startPos, charsToDisplay);
+    lineBuffer[charsToDisplay] = '\0'; // Add null terminator
+    
+    // Display the current line
+    EPD_ShowString(60, 70 + (lineHeight * currentLine), lineBuffer, 24, BLACK);
+    
+    // Prepare for the next line
+    startPos += charsToDisplay;
+    currentLine++;
+  }
 
   // Update Display
   EPD_Display(ImageBW);
   EPD_PartUpdate();
-  
-  Serial.print("Error displayed: ");
-  Serial.println(message);
 }
 
 //=============================================================================
@@ -253,13 +277,13 @@ bool connectToWiFi() {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   
   // Connection Timeout (10 seconds)
-  const int WIFI_TIMEOUT_MS = 10000;
-  const int DELAY_MS = 500;
-  int attempts = WIFI_TIMEOUT_MS / DELAY_MS;
+  const int wifiTimeoutMs = 10000;
+  const int delayMs = 500;
+  int attempts = wifiTimeoutMs / delayMs;
   
   // Wait until Connection is Complete
   while (WiFi.status() != WL_CONNECTED && attempts > 0) {
-    delay(DELAY_MS);
+    delay(delayMs);
     Serial.print(".");
     attempts--;
   }
@@ -299,7 +323,8 @@ String httpGETRequest(const char* url) {
   http.begin(client, url);
 
   // Set HTTP Request Timeout
-  http.setTimeout(HTTP_TIMEOUT_MS);
+  const int httpTimeoutMs = 10000; // HTTP request timeout in milliseconds
+  http.setTimeout(httpTimeoutMs);
 
   Serial.print("Sending HTTP GET request to: ");
   Serial.println(url);
@@ -315,7 +340,7 @@ String httpGETRequest(const char* url) {
     Serial.print("HTTP Response code: ");
     Serial.println(httpResponseCode);
     
-    if (httpResponseCode == 200) {
+    if (httpResponseCode == HTTP_CODE_OK) {
       // Copy Response to Buffer
       payload = http.getString();
     } else {
@@ -324,7 +349,6 @@ String httpGETRequest(const char* url) {
   } else {
     Serial.print("HTTP Request failed, error code: ");
     Serial.println(httpResponseCode);
-    enterDeepSleep();
   }
   
   // Release HTTP Client Resources
@@ -367,9 +391,8 @@ int getWeatherIconNum(String OpenWeatherMapIcon) {
  */
 void storeWeatherInfo(int index, long unixTime, String iconCode, float temperature, float pop) {
   if (index < 0 || index >= FORECAST_COUNT) {
-    Serial.println("Error: Invalid forecast index");
-    displayErrorMessage("Error: Invalid forecast index");
-    enterDeepSleep();
+    displayErrorMessage("Invalid forecast index");
+    enterDeepSleep(true);
     return;
   }
 
@@ -440,28 +463,60 @@ String fetchWeatherData(bool useTestData = TEST_MODE) {
   
   // Send HTTP Request and Get Response
   int retryCount = 0;
-  bool requestSuccess = false;
+  bool exitLoop = false;
   String responseData = "";
   
-  while (retryCount < MAX_RETRY_COUNT && !requestSuccess) {
+  const int maxRetryCount = 3;     // Maximum number of retry attempts
+  while (retryCount < maxRetryCount && !exitLoop) {
     responseData = httpGETRequest(url.c_str());
-    
-    if (httpResponseCode == 200) {
-      requestSuccess = true;
-    } else {
-      retryCount++;
-      Serial.print("Retry attempt ");
-      Serial.print(retryCount);
-      Serial.print(" of ");
-      Serial.println(MAX_RETRY_COUNT);
-      delay(1000);
+
+    switch (httpResponseCode) {
+      case HTTP_CODE_OK:
+        exitLoop = true;
+        break;
+      case HTTP_CODE_BAD_REQUEST:
+        exitLoop = true;
+        displayErrorMessage("Either some mandatory parameters in the request are missing or some of request parameters have incorrect format or values out of allowed range.");
+        enterDeepSleep(false);
+        break;
+      case HTTP_CODE_UNAUTHORIZED:
+        exitLoop = true;
+        displayErrorMessage("API token did not providen in the request or in case API token provided in the request does not grant access to this API.");
+        enterDeepSleep(false);
+        break;
+      case HTTP_CODE_NOT_FOUND:
+        exitLoop = true;
+        displayErrorMessage("Data with requested parameters (lat, lon, date etc) does not exist in service database.");
+        enterDeepSleep(false);
+        break;
+      case HTTP_CODE_TOO_MANY_REQUESTS:
+        exitLoop = true;
+        displayErrorMessage("Key quota of requests for provided API to this API was exceeded.");
+        enterDeepSleep(false);
+        break;
+      case HTTP_CODE_INTERNAL_SERVER_ERROR:
+      case HTTP_CODE_BAD_GATEWAY:
+      case HTTP_CODE_SERVICE_UNAVAILABLE:
+      case HTTP_CODE_GATEWAY_TIMEOUT:
+        Serial.println("Unexpected Error.");
+        retryCount++;
+        Serial.print("Retry attempt ");
+        Serial.print(retryCount);
+        Serial.print(" of ");
+        Serial.println(maxRetryCount);
+        delay(60000);
+        break;
+      default:
+        exitLoop = true;
+        displayErrorMessage("Unknown Error.");
+        enterDeepSleep(false);
+        break;
     }
   }
   
-  if (!requestSuccess) {
-    Serial.println("Failed to fetch weather forecast data after multiple attempts");
+  if (!exitLoop) {
     displayErrorMessage("Failed to fetch weather forecast data after multiple attempts");
-    enterDeepSleep();
+    enterDeepSleep(false);
     return "";
   }
   
@@ -539,7 +594,7 @@ void fetchAndAnalyzeWeatherData() {
   
   // Analyze the weather data
   if (!analyzeWeatherData(jsonData)) {
-    enterDeepSleep();
+    enterDeepSleep(true);
   }
 }
 
@@ -549,21 +604,22 @@ void fetchAndAnalyzeWeatherData() {
 void setup() {
   // Initialize Serial Communication
   Serial.begin(115200);
-  Serial.println("Weather Display System Starting...");
+  Serial.println("Weather Forecast Display System Starting...");
 
   // Set E-Paper Display Power Pin
-  pinMode(EPD_POWER_PIN, OUTPUT);
-  digitalWrite(EPD_POWER_PIN, HIGH);
+  const int epdPowerPin = 7;     // GPIO pin for E-Paper power control
+  pinMode(epdPowerPin, OUTPUT);
+  digitalWrite(epdPowerPin, HIGH);
 
   // Initialize E-Paper Display GPIO
   EPD_GPIOInit();
   
-  // テストモードでない場合のみWiFi接続を行う
+  // Only connect to WiFi if not in test mode
   if (!TEST_MODE) {
     // WiFi Connection
     if (!connectToWiFi()) {
       displayErrorMessage("WiFi Connection Error");
-      enterDeepSleep();
+      enterDeepSleep(false);
       return;
     }
   }
@@ -571,7 +627,7 @@ void setup() {
   // Fetch and Analyze Weather forecast Data
   fetchAndAnalyzeWeatherData();
   
-  // テストモードでない場合のみWiFi切断を行う
+  // Only disconnect WiFi if not in test mode
   if (!TEST_MODE) {
     // Disconnect WiFi (Power Saving)
     disconnectWiFi();
@@ -581,7 +637,7 @@ void setup() {
   displayWeatherForecast();
   
   // Enter Deep-Sleep Mode
-  enterDeepSleep();
+  enterDeepSleep(true);
 }
 
 /**
