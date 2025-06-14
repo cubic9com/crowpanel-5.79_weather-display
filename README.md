@@ -13,7 +13,7 @@
 
 # Overview / 概要
 
-This project is a weather forecast display system that uses [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It shows weather forecasts at 3-hour intervals for the next 12 hours.
+This project is a weather forecast display system that uses [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays weather forecast at 3-hour intervals for the next 12 hours.
 The weather forecast data is obtained using [OpenWeatherMap](https://openweathermap.org/) API.
 
 \[日本語\]
@@ -29,14 +29,14 @@ The weather forecast data is obtained using [OpenWeatherMap](https://openweather
 # Why I Made This / 開発のきっかけ
 
 I developed this weather forecast display system for my young children.
-While adults can easily check the weather on their smartphones each morning and dress or plan accordingly, young children don’t usually have access to such tools.
+While adults can easily check the weather on their smartphones each morning and dress or plan accordingly, young children typically do not have access to such tools.
 To address this, I created a weather display system that children can check on their own.
-By using an E-Paper for display, it is not only easy to read but also energy efficient.
+By using an E-Paper display, the system becomes not only easy to read but also energy efficient.
 
 \[日本語\]
 
 この天気予報表示システムは、私の幼い子どもたちのために開発しました。
-毎朝、大人はスマートフォンで簡単に天気を確認して、必要な準備をすることができますが、幼い子どもたちにはそうした手段がありません。
+毎朝、大人はスマートフォンで簡単に天気を確認して、必要な準備ができますが、幼い子どもたちにはそうした手段がありません。
 そこで、子どもたちが自分で天気を確認できるようなシステムを作りました。
 表示に電子ペーパーを使用することで、見やすいだけでなく省電力にもなっています。
 
@@ -79,8 +79,8 @@ The system operates as follows:
 
 To retrieve weather forecast data, you need an API key from [OpenWeatherMap](https://openweathermap.org/).
 This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), which requires registering a credit card, along with your address and phone number.
-[This API is free for up to 1,000 calls per day; beyond that, a charge of £0.12 is applied for each additional 100 calls](https://openweathermap.org/price).
-However, as described below, by setting the daily request limit to 900, you should be able to use the service for free.
+[This API is free for up to 1,000 calls per day; beyond that, a charge of £0.12 is incurred for each additional 100 calls](https://openweathermap.org/price).
+However, by setting the daily request limit to 900, as described below, you should be able to use the service for free.
 
 1. Open the [official OpenWeatherMap website](https://openweathermap.org/).
 
@@ -109,7 +109,7 @@ However, as described below, by setting the daily request limit to 900, you shou
 
 1. Click the "API keys" tab.
 
-1. Make a note of your API key.
+1. Note down your API key.
 
 1. Click the "Billing plans" tab.
 
@@ -119,13 +119,13 @@ However, as described below, by setting the daily request limit to 900, you shou
 
 1. Enter your credit card information (through [Stripe](https://stripe.com)).
 
-1. To avoid unexpected charges, click the pencil icon next to the "Calls per day (no more than)" field and set the value to less than 1000 (I set it to 900).
+1. To avoid unexpected charges, click the pencil icon beside the "Calls per day (no more than)" field and set the value to less than 1000 (I set it to 900).
 
 \[日本語\]
 
 天気情報を取得するために、 [OpenWeatherMap](https://openweathermap.org/) のAPIキーが必要です。
-本システムでは「 [One Call API 3.0](https://openweathermap.org/api/one-call-3) 」を使用するため、クレジットカードの登録と住所や電話番号の登録が必要となります。
-[このAPIは、1日1000回までは無料ですが、それを超えると、100回毎に0.12ポンド請求されます。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定しますので、無料での運用が可能と考えています。
+本システムでは「 [One Call API 3.0](https://openweathermap.org/api/one-call-3) 」を使用するため、クレジットカードの登録と住所や電話番号の登録が必要です。
+[このAPIは、1日1000回までは無料ですが、それを超えた場合、100回毎に0.12ポンド請求されます。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定しますので、無料での運用が可能と考えています。
 
 1. [OpenWeatherMapの公式サイト](https://openweathermap.org/) を開きます。
 
@@ -291,7 +291,7 @@ By using this project, you agree to assume full responsibility for any and all o
 
 \[日本語\]
 
-本プロジェクトは、教育目的および個人利用を想定して提供されます。システムおよび依存する外部サービスの正確性、信頼性、継続的な提供について、作者は一切の保証を行いません。
+本プロジェクトは、教育目的および個人利用を想定して提供しています。システムおよび依存する外部サービスの正確性、信頼性、継続的な提供について、作者は一切の保証を行いません。
 
 本ソフトウェアの使用は自己責任でおこってください。著者は、以下を含む本ソフトウェアの使用により生じたいかなる損害、データの損失、費用、その他の結果についても責任を負いません：
 
