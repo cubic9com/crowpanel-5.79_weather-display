@@ -10,7 +10,7 @@
  * using the software "Image2Lcd".
  */
 
-const unsigned char Weather_Num[11][2048] = {
+const unsigned char Weather_Num[7][2048] = {
     // clear day
     { /* 0X00,0X01,0X80,0X00,0X80,0X00, */
         0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,

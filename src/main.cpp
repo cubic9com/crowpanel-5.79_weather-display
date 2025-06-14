@@ -189,10 +189,12 @@ void displayWeatherForecast()
       EPD_DrawCircle(100 + baseX, 201, 2, BLACK, false);
       EPD_DrawCircle(100 + baseX, 201, 3, BLACK, false);
 
-      // Display Probability of precipitation
-      memset(buffer, 0, sizeof(buffer));
-      snprintf(buffer, sizeof(buffer), "%3d %%", (int)round(100 * hourlyForecasts[i].pop));
-      EPD_ShowString(30 + baseX, 225, buffer, 36, BLACK);
+      if (i != 0) {
+        // Display Probability of precipitation
+        memset(buffer, 0, sizeof(buffer));
+        snprintf(buffer, sizeof(buffer), "%3d %%", (int)round(100 * hourlyForecasts[i].pop));
+        EPD_ShowString(30 + baseX, 225, buffer, 36, BLACK);
+      }
     }
   }
 
