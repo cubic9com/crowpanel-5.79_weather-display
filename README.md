@@ -14,7 +14,7 @@
 # Overview / 概要
 
 This project is a weather forecast display system that uses [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays weather forecast at 3-hour intervals for the next 12 hours.
-The weather forecast data is obtained using [OpenWeatherMap](https://openweathermap.org/) API.
+The weather forecast data is retrieved via [OpenWeatherMap](https://openweathermap.org/) API.
 
 \[日本語\]
 
@@ -24,7 +24,7 @@ The weather forecast data is obtained using [OpenWeatherMap](https://openweather
 
 # Photos / 写真
 
-![crowpanel-5.79_weather-display.jpg](crowpanel-5.79_weather-display.jpg)
+![crowpanel-5.79_weather-display.jpg](images/crowpanel-5.79_weather-display.jpg)
 
 # Why I Made This / 開発のきっかけ
 
@@ -36,7 +36,7 @@ By using an E-Paper display, the system becomes not only easy to read but also e
 \[日本語\]
 
 この天気予報表示システムは、私の幼い子どもたちのために開発しました。
-毎朝、大人はスマートフォンで簡単に天気を確認して、必要な準備ができますが、幼い子どもたちにはそうした手段がありません。
+毎朝、大人はスマートフォンで簡単に天気を確認して、必要な準備ができますが、幼い子どもたちには通常そうした手段がありません。
 そこで、子どもたちが自分で天気を確認できるようなシステムを作りました。
 表示に電子ペーパーを使用することで、見やすいだけでなく省電力にもなっています。
 
@@ -45,7 +45,7 @@ By using an E-Paper display, the system becomes not only easy to read but also e
 The system operates as follows:
 
 1. Connects to a 2.4 GHz WiFi network on startup.
-1. Retrieves the current weather and forecast (3, 6, 9, and 12 hours ahead) using [OpenWeatherMap](https://openweathermap.org/) API.
+1. Retrieves the current weather and forecast (3, 6, 9, and 12 hours ahead) via [OpenWeatherMap](https://openweathermap.org/) API.
 1. Displays weather information (time, weather condition, temperature, and probability of precipitation) on the E-Paper display.
 1. Enters [Deep-sleep mode](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/sleep_modes.html) to save power.
 1. Restarts after the configured interval (default: 1 hour).
@@ -62,7 +62,7 @@ The system operates as follows:
 
 # Hardware / ハードウェア構成
 
-- [Elecrow CrowPanel ESP32 5.79” E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) :
+- [Elecrow CrowPanel ESP32 5.79-inch E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) :
 
     - A display module equipped with a 5.79-inch E-Paper display. The display has a resolution of 272(H) × 792(L) pixels.
     - Its main controller is [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3). It is certified under FCC ID [2AC7Z-ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1), CE compliant under the RED directive, and is certified in Japan under TELEC No. [R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist).
@@ -70,10 +70,16 @@ The system operates as follows:
 
 \[日本語\]
 
-- [Elecrow CrowPanel ESP32 5.79” E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
+- [Elecrow CrowPanel ESP32 5.79-inch E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
     - 5.79インチの電子ペーパーを搭載したディスプレイモジュールです。解像度は272(H)×792(L)ピクセル。
     - メインコントローラーは [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3) です。FCC ID「[2AC7Z-ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1)」 の認証を取得しており、RED指令に基づくCE適合、および日本の技術基準適合認証（技適/TELEC）番号「[R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist)」を取得しています。
-    - アクリル板製のエンクロージャーに入っています。
+    - アクリル板製のエンクロージャーに収められています。
+
+![crowpanel-5.79_01.jpg](images/crowpanel-5.79_01.jpg)
+
+![crowpanel-5.79_02.jpg](images/crowpanel-5.79_02.jpg)
+
+![crowpanel-5.79_03.jpg](images/crowpanel-5.79_03.jpg)
 
 # Before You Start / 事前準備
 
@@ -82,7 +88,7 @@ This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), 
 [This API is free for up to 1,000 calls per day; beyond that, a charge of £0.12 is incurred for each additional 100 calls](https://openweathermap.org/price).
 However, by setting the daily request limit to 900, as described below, you should be able to use the service for free. If you exceed the daily limit, you'll get HTTP response status code 429 (see the [FAQ](https://openweathermap.org/faq) `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`).
 
-1. Open the [official OpenWeatherMap website](https://openweathermap.org/).
+1. Open the [OpenWeatherMap website](https://openweathermap.org/).
 
 1. Click "Sign in" at the top right corner.
 
@@ -124,8 +130,8 @@ However, by setting the daily request limit to 900, as described below, you shou
 \[日本語\]
 
 天気予報情報を取得するために、 [OpenWeatherMap](https://openweathermap.org/) のAPIキーが必要です。
-本システムでは「 [One Call API 3.0](https://openweathermap.org/api/one-call-3) 」を使用するため、クレジットカードと住所・電話番号を登録する必要があります。
-[このAPIは、1日1000回までは無料ですが、それを超えた場合、100回毎に0.12ポンド請求されます。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定しますので、無料での運用が可能と考えています。もし1日の実行回数を超えた場合は、HTTPレスポンスステータスコード429が返却されます（[FAQ](https://openweathermap.org/faq) の `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`を参照のこと）。
+本システムでは「[One Call API 3.0](https://openweathermap.org/api/one-call-3)」を使用するため、クレジットカードと住所・電話番号を登録する必要があります。
+[このAPIは、1日1000回までは無料ですが、それを超えた場合、100回毎に0.12ポンドの料金が発生します。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定することで、無料での運用が可能と考えています。もし1日の実行可能回数を超えた場合は、HTTPレスポンスステータスコード429が返却されます（[FAQ](https://openweathermap.org/faq) の `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`を参照のこと）。
 
 1. [OpenWeatherMapの公式サイト](https://openweathermap.org/) を開きます。
 
@@ -208,7 +214,7 @@ However, by setting the daily request limit to 900, as described below, you shou
     #define INTERVAL_IN_MINUTES 60 // 1 hour
     ```
     
-    Note: You can obtain the latitude and longitude from the URL after searching for your desired location in [Google Maps](https://www.google.com/maps/).
+    Note: You can get the latitude and longitude from the URL after searching for your desired location in [Google Maps](https://www.google.com/maps/).
 
 
 1. Build and upload the project:
@@ -259,7 +265,7 @@ However, by setting the daily request limit to 900, as described below, you shou
 
     なお、緯度と経度は [Googleマップ](https://www.google.com/maps/) で天気予報を表示したい地点を検索した後のURLから取得できます。
 
-1. プロジェクトをアップロードします:
+1. プロジェクトをビルド＆アップロードします:
     - 左のメインサイドバーから `PROJECT TASKS > esp32-s3-devkit-1 > General > Upload` を選択します。
 
 # Credits / クレジット
@@ -293,7 +299,7 @@ By using this project, you agree to assume full responsibility for any and all o
 
 本プロジェクトは、教育目的および個人利用を想定して提供しています。システムおよび依存する外部サービスの正確性、信頼性、継続的な提供について、作者は一切の保証を行いません。
 
-本ソフトウェアの使用は自己責任でおこってください。著者は、以下を含む本ソフトウェアの使用により生じたいかなる損害、データの損失、費用、その他の結果についても責任を負いません：
+本ソフトウェアの使用は自己責任でおこなってください。著者は、以下を含む本ソフトウェアの使用により生じたいかなる損害、データの損失、費用、その他の結果についても責任を負いません：
 
 * システムの誤使用や設定ミス
 * [OpenWeatherMap](https://openweathermap.org/) など外部APIの制限や仕様変更
