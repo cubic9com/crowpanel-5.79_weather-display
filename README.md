@@ -308,10 +308,18 @@ By using this project, you agree to assume full responsibility for any and all o
 
 本プロジェクトを利用することで、すべてのリスクと結果に対する責任をユーザー自身が負うことに同意したものとみなされます。
 
+# Related Projects / 関連プロジェクト
+
+- [FontGen4LCDandEPD](https://github.com/cubic9com/FontGen4LCDandEPD): A lightweight Python script that converts TrueType fonts into C-style byte array for use on LCD and EPD (e-paper) modules in embedded systems. It is intended as a simplified alternative to PCtoLCD2002.
+
+\[日本語\]
+
+- [FontGen4LCDandEPD](https://github.com/cubic9com/FontGen4LCDandEPD): TrueTypeフォントを1ビットモノクロのビットマップフォントに変換し、 C言語形式のバイト配列として出力する軽量なPythonスクリプト。 LCDや EPD（電子ペーパー）などの組み込み機器での利用を想定しています。PCtoLCD2002の代替として使用できる（機能は単純化）。
+
 # License / ライセンス
 
 Copyright (C) 2025, cubic9com All rights reserved.
 
 This project is licensed under the MIT license.
 
-See file `LICENSE` file for details.
+See the `LICENSE` file for details.

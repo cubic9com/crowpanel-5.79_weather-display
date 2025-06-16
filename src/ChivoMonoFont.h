@@ -11,25 +11,28 @@
  * using the software "PCtoLCD2002" (english version).
  *
  * 1. First of all, click on the gear icon and set the following:
- *     - "Format" ("点阵格式"):
+ *     - "dot matrix format" ("点阵格式"):
  *         Select first option ("Negative" / "阴码").
- *     - "Mode" ("取模方式"):
+ *     - "data extraction mode" ("取模方式"):
  *         Select third option ("Column-by-Column" / "列行式").
- *     - "Output per" > "Data" ("每行显示数据" > "点阵"):
+ *     - "output per" > "data" ("每行显示数据" > "点阵"):
  *         Instead of selecting it from the drop-down list, type 1024 on your keyboard..
- *     - "Endian" ("取模走向"):
+ *     - "endian" ("取模走向"):
  *         Select first option ("Big Endian" / "逆向(低位在前)"").
- *     - "Format" ("输出数制"):
+ *     - "output number format" ("输出数制"):
  *         Select first option ("Hex" / "十六进制数").
- *     - "Output" ("输出选项"):
+ *     - "output" ("输出选项"):
  *         Check all.
- *     - "View" ("液晶面板仿真"):
+ *     - "view" ("液晶面板仿真"):
  *         Leave it at the default value.
- *     - "Custom" ("自定义格式"):
+ *     - "custom format" ("自定义格式"):
  *         Select first option ("C51格式").
  * 2. Next, enter " !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[55]^_'abcdefghijklmnopqrstuvwxyz-"
  *    in the input field in the middle.
  * 3. Then click the "generate" ("生成字模") button.
+ * 
+ * You can use FontGen4LCDandEPD also.
+ * https://github.com/cubic9com/FontGen4LCDandEPD
  */
 
 const unsigned char chivo_mono_3618[][96] = {
