@@ -186,12 +186,12 @@ However, by setting the daily request limit to 900, as described below, you shou
     code .
     ```
 
-1. Install the `PlatformIO IDE` extension:
+1. Install `PlatformIO IDE` extension:
     - Go to the Extensions view (`Ctrl+Shift+X`).
     - Search for `PlatformIO IDE` and install it.
 
 1. Open PlatformIO Home:
-    - In the left Activity Bar, click the PlatformIO icon.
+    - In the left Activity Bar, click PlatformIO icon.
     - In the left Primary Sidebar, go to `QUICK ACCESS > PIO Home > Open`.
 
 1. Open the project:
