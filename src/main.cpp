@@ -14,6 +14,7 @@
 #include "icons.h"
 #include "config.h"
 #include "../test/testdata.h" // data for offline test
+#include <map>
 
 //=============================================================================
 // Constants
@@ -47,14 +48,6 @@ enum WeatherIconNumber {
 };
 
 /**
- * Mapping between OpenWeatherMap icon codes and our icon enumeration
- */
-struct WeatherMapping {
-  String iconCode;   // icon code in OpenWeatherMap
-  int iconNumber;    // Corresponding icon number in our system
-};
-
-/**
  * Forecast information structure
  * Stores weather forecast data for a specific time period
  */
@@ -73,7 +66,7 @@ struct ForecastInfo {
  * Weather mapping table
  * Maps OpenWeatherMap icon codes to our icon enumeration
  */
-const WeatherMapping WEATHER_MAPPINGS[] = {
+std::map<String, WeatherIconNumber> WEATHER_MAPPINGS = {
   {"01d", ICON_CLEAR_DAY},
   {"01n", ICON_CLEAR_NIGHT},
   {"02d", ICON_CLOUDS},
@@ -93,8 +86,6 @@ const WeatherMapping WEATHER_MAPPINGS[] = {
   {"50d", ICON_MIST},
   {"50n", ICON_MIST}
 };
-
-const size_t WEATHER_MAPPINGS_COUNT = sizeof(WEATHER_MAPPINGS) / sizeof(WeatherMapping);
 
 //=============================================================================
 // Global Variables
@@ -369,15 +360,13 @@ String httpGETRequest(const char* url) {
  */
 int getWeatherIconNum(String OpenWeatherMapIcon) {
   // Search for a Match from the Mapping Table
-  for (size_t i = 0; i < WEATHER_MAPPINGS_COUNT; i++) {
-    if (OpenWeatherMapIcon.indexOf(WEATHER_MAPPINGS[i].iconCode) != -1) {
-      return WEATHER_MAPPINGS[i].iconNumber;
-    }
+  if (WEATHER_MAPPINGS.find(OpenWeatherMapIcon) != WEATHER_MAPPINGS.end()) {
+    return WEATHER_MAPPINGS[OpenWeatherMapIcon];
   }
   
   // Default is Cloudy if no match found
   Serial.println("Warning: No icon match found for " + OpenWeatherMapIcon + ", using default");
-  return ICON_CLOUDS;
+  return ICON_THUNDERSTORM;
 }
 
 /**

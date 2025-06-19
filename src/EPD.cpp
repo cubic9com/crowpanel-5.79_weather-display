@@ -2,6 +2,7 @@
 #include "EPDfont.h"
 #include "ChivoMonoFont.h"
 #include "string.h"
+#include <map>
 
 PAINT Paint;
 
@@ -274,42 +275,38 @@ void EPD_DrawCircle(uint16_t X_Center, uint16_t Y_Center, uint16_t Radius, uint1
 *******************************************************************/
 void EPD_ShowChar(uint16_t x, uint16_t y, uint16_t chr, uint16_t size1, uint16_t color)
 {
-    uint16_t i, m, temp, size2, chr1;
+    uint16_t i, m, temp, chr1;
     uint16_t x0, y0;
     x0 = x, y0 = y;
-    if (size1 == 8)
-        size2 = 6;
-    else
-        size2 = (size1 / 8 + ((size1 % 8) ? 1 : 0)) * (size1 / 2); // Get the number of bytes occupied by the dot matrix set corresponding to a character in the font
+    
+    // Mapping of font size to font data and bytes per character
+    struct FontInfo {
+        const unsigned char* data;
+        uint16_t bytes_per_char;
+    };
+    static std::map<uint16_t, FontInfo> font_map = {
+        {24, {(const unsigned char*)ascii_2412, 36}},      // ascii_2412[][36]
+        {36, {(const unsigned char*)chivo_mono_3618, 96}}, // chivo_mono_3618[][96]
+        {44, {(const unsigned char*)chivo_mono_4422, 132}} // chivo_mono_4422[][132]
+    };
+    
     chr1 = chr - ' ';                                               // Calculate the offset value
-    for (i = 0; i < size2; i++)
+    
+    // Get corresponding font data from font map
+    auto font_it = font_map.find(size1);
+    if (font_it == font_map.end())
     {
-        if (size1 == 12)
-        {
-            temp = ascii_1206[chr1][i];
-        } // Call 1206 font
-        else if (size1 == 16)
-        {
-            temp = ascii_1608[chr1][i];
-        } // Call 1608 font
-        else if (size1 == 24)
-        {
-            temp = ascii_2412[chr1][i];
-        } // Call 2412 font
-        else if (size1 == 36)
-        {
-            temp = chivo_mono_3618[chr1][i];
-        } // Call 2412 font
-        else if (size1 == 44)
-        {
-            temp = chivo_mono_4422[chr1][i];
-        } // Call 4422 font
-        else if (size1 == 48)
-        {
-            temp = ascii_4824[chr1][i];
-        } // Call 4824 font
-        else
-            return;
+        return; // Unsupported font size
+    }
+    
+    const unsigned char* font_data = font_it->second.data;
+    uint16_t bytes_per_char = font_it->second.bytes_per_char;
+    
+    for (i = 0; i < bytes_per_char; i++)
+    {
+        // Get character byte from font data
+        temp = font_data[chr1 * bytes_per_char + i];
+        
         for (m = 0; m < 8; m++)
         {
             if (temp & 0x01)
