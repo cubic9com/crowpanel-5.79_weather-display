@@ -13,13 +13,13 @@
 
 # Overview / 概要
 
-This project is a weather forecast display system that uses [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays weather forecast at 3-hour intervals for the next 12 hours.
+This project is a weather forecast display system that uses [Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays weather forecast at 3-hour intervals for the next 12 hours.
 The weather forecast data is retrieved via [OpenWeatherMap](https://openweathermap.org/) API.
 
 \[日本語\]
 
 このプロジェクトは、天気予報表示システムです。12時間後までの3時間ごとの天気予報を表示します。
-ハードウェアは [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) を使っています。
+ハードウェアは [ElecrowのCrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) を使っています。
 天気予報データは、[OpenWeatherMap](https://openweathermap.org/) APIにて取得します。
 
 # Photos / 写真
@@ -62,7 +62,7 @@ The system operates as follows:
 
 # Hardware / ハードウェア構成
 
-- [Elecrow CrowPanel ESP32 5.79-inch E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) :
+- [Elecrow's CrowPanel ESP32 5.79-inch E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) :
 
     - A display module equipped with a 5.79-inch E-Paper display. The display has a resolution of 272(H) × 792(L) pixels.
     - Its main controller is [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3). It is certified under FCC ID [2AC7Z-ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1), CE compliant under the RED directive, and is certified in Japan under TELEC No. [R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist).
@@ -70,9 +70,9 @@ The system operates as follows:
 
 \[日本語\]
 
-- [Elecrow CrowPanel ESP32 5.79-inch E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
+- [ElecrowのCrowPanel ESP32 5.79-inch E-paper HMI Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)
     - 5.79インチの電子ペーパーを搭載したディスプレイモジュールです。解像度は272(H)×792(L)ピクセル。
-    - メインコントローラーは [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3) です。FCC ID「[2AC7Z-ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1)」 の認証を取得しており、RED指令に基づくCE適合、および日本の技術基準適合認証（技適/TELEC）番号「[R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist)」を取得しています。
+    - メインコントローラーは [ESP32-S3-WROOM-1-N8R8](https://www.espressif.com/en/products/modules/esp32-s3) です。FCC ID [2AC7Z-ESPS3WROOM1](https://fcc.report/FCC-ID/2AC7Z-ESPS3WROOM1) の認証を取得しており、RED指令に基づくCE適合、および日本の技術基準適合認証（技適/TELEC）番号 [R 201-220052](https://www.tele.soumu.go.jp/giteki/SearchServlet?pageID=jk01&NUM_TYPE=1&NUM=201-220052&NAM=&FOM=&PC=&YAR_FROM=&MON_FROM=&DAY_FROM=&YAR_TO=&MON_TO=&DAY_TO=&RAD=00-00-00-00&TEC=1&TEC=2&TEC=3&TEC=4&TEC=5&TEC=6&TEC=7&DC=0&SC=1#searchlist) を取得しています。
     - アクリル板製のエンクロージャーに収められています。
 
 ![crowpanel-5.79_01.jpg](images/crowpanel-5.79_01.jpg)
@@ -83,10 +83,11 @@ The system operates as follows:
 
 # Before You Start / 事前準備
 
-To retrieve weather forecast data, you need an API key from [OpenWeatherMap](https://openweathermap.org/).
+To get weather forecast data, you need an API key from [OpenWeatherMap](https://openweathermap.org/).
 This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), which requires registering a credit card, along with your address and phone number.
 [This API is free for up to 1,000 calls per day; beyond that, a charge of £0.12 is incurred for each additional 100 calls](https://openweathermap.org/price).
-However, by setting the daily request limit to 900, as described below, you should be able to use the service for free. If you exceed the daily limit, you'll get HTTP response status code 429 (see the [FAQ](https://openweathermap.org/faq) `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`).
+
+**IMPORTANT**: To avoid unexpected charges, be sure to follow step 16 below to set your daily request limit to 900. This should allow you to use the service free of charge. If you exceed the daily limit, you'll get an HTTP 429 response status code. (see the [FAQ](https://openweathermap.org/faq) `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`).
 
 1. Open the [OpenWeatherMap website](https://openweathermap.org/).
 
@@ -130,8 +131,10 @@ However, by setting the daily request limit to 900, as described below, you shou
 \[日本語\]
 
 天気予報情報を取得するために、 [OpenWeatherMap](https://openweathermap.org/) のAPIキーが必要です。
-本システムでは「[One Call API 3.0](https://openweathermap.org/api/one-call-3)」を使用するため、クレジットカードと住所・電話番号を登録する必要があります。
-[このAPIは、1日1000回までは無料ですが、それを超えた場合、100回毎に0.12ポンドの料金が発生します。](https://openweathermap.org/price) ただし、後述の通り、1日の実行可能回数を900回に設定することで、無料での運用が可能と考えています。もし1日の実行可能回数を超えた場合は、HTTPレスポンスステータスコード429が返却されます（[FAQ](https://openweathermap.org/faq) の `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`を参照のこと）。
+本システムでは [One Call API 3.0](https://openweathermap.org/api/one-call-3) を使用するため、クレジットカードと住所・電話番号を登録する必要があります。
+[このAPIは、1日1000回までは無料ですが、それを超えた場合、100回毎に0.12ポンドの料金が発生します。](https://openweathermap.org/price) 
+
+**重要**: 意図せず費用を請求されることを防ぐために、以下の手順16に従って、1日あたりのリクエスト制限を900に設定してください。これにより、サービスの無料での利用が可能と考えています。1日あたりの制限を超えた場合は、HTTP 429 レスポンスステータスコードが返されます（ [FAQ](https://openweathermap.org/faq) の `I'm worried that I might accidentally make too many calls and be charged for them. How can I limit API calls?`を参照のこと）。
 
 1. [OpenWeatherMapの公式サイト](https://openweathermap.org/) を開きます。
 
@@ -198,7 +201,9 @@ However, by setting the daily request limit to 900, as described below, you shou
     - In the right Editor Group, click `Open Project` in the `PIO HOME` tab.
     - Select the cloned `crowpanel-5.79_weather-display` project folder.
 
-1. Make a copy of `config.template.h`, name it `config.h`, and configure it as follows.
+1. Find the `config.template.h` file. Make a copy of it and rename the copy to `config.h`.
+
+1. Open this new `config.h` file and modify the following lines with your own details:
     ```cpp
     // 2.4 GHz WiFi Configurations
     #define WIFI_SSID "your WiFi SSID"
@@ -218,7 +223,7 @@ However, by setting the daily request limit to 900, as described below, you shou
 
 
 1. Build and upload the project:
-    - In the left Primary Sidebar, go to `PROJECT TASKS > esp32-s3-devkit-1 > General > Upload`.
+    - In the PlatformIO sidebar, go to `PROJECT TASKS > esp32-s3-devkit-1 > General > Upload`.
 
 \[日本語\]
 
@@ -247,7 +252,9 @@ However, by setting the daily request limit to 900, as described below, you shou
     - 右のエディターグループ内の `PIO HOME` タブで `Open Project` をクリックします。
     - クローンした `crowpanel-5.79_weather-display` プロジェクトフォルダーを選択します。
 
-1. `config.template.h`をコピーして、 `config.h`を作り、以下の設定をします。
+1. `config.template.h` ファイルを見つけます。コピーを作成し、名前を `config.h` に変更します。
+
+1. この新しい `config.h` ファイルを開き、以下の行を必要に応じて変更します。
     ```cpp
     // 2.4 GHz WiFi設定
     #define WIFI_SSID "あなたのWiFi SSID"
@@ -266,18 +273,18 @@ However, by setting the daily request limit to 900, as described below, you shou
     なお、緯度と経度は [Googleマップ](https://www.google.com/maps/) で天気予報を表示したい地点を検索した後のURLから取得できます。
 
 1. プロジェクトをビルド＆アップロードします:
-    - 左のメインサイドバーから `PROJECT TASKS > esp32-s3-devkit-1 > General > Upload` を選択します。
+    - PlatformIOのサイドバーで `PROJECT TASKS > esp32-s3-devkit-1 > General > Upload` を選択します。
 
 # Credits / クレジット
 
-- This program was developed based on the [Arduino demo for Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather).
+- This program was developed based on the [Arduino demo for Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather).
 - Weather data provided by [OpenWeather](https://openweathermap.org/).
 - The weather icons are from [Easy Weather Icons Font set by boxbot6](https://github.com/boxbot6/easy-weather-icons-font), licensed under the MIT License.
 - The font is [Chivo Mono by Omnibus-Type](https://fonts.google.com/specimen/Chivo+Mono), licensed under the SIL Open Font License, Version 1.1.
 
 \[日本語\]
 
-- このプログラムは、 [Elecrow CrowPanel ESP32 E-Paper HMI 5.79-inch DisplayのArduino用デモプログラム](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) をベースに開発しました。
+- このプログラムは、 [ElecrowのCrowPanel ESP32 E-Paper HMI 5.79-inch DisplayのArduino用デモプログラム](https://github.com/Elecrow-RD/CrowPanel-ESP32-5.79-E-paper-HMI-Display-with-272-792/tree/master/example/arduino/Demos/5.79_wifi_http_openweather) をベースに開発しました。
 - 天気予報情報は [OpenWeather](https://openweathermap.org/) によって提供されたものです。
 - 天気アイコンは [boxbot6様のEasy Weather Icons Font set](https://github.com/boxbot6/easy-weather-icons-font) を、MITライセンスの下で使用しています。
 - フォントは [Omnibus-Type様のChivo Mono](https://fonts.google.com/specimen/Chivo+Mono) を、SIL Open Font License, Version 1.1の下で使用しています。
