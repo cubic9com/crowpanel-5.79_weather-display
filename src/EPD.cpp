@@ -278,7 +278,16 @@ void EPD_ShowChar(uint16_t x, uint16_t y, uint16_t chr, uint16_t size1, uint16_t
     uint16_t i, m, temp, chr1;
     uint16_t x0, y0;
     x0 = x, y0 = y;
-    
+
+    // Fonts only support printable ASCII characters (' ' to '~').
+    // Fall back to '?' for any character outside this range to avoid
+    // an unsigned underflow/overflow when computing chr1 below,
+    // which would otherwise cause an out-of-bounds read into font_data[].
+    if (chr < ' ' || chr > '~')
+    {
+        chr = '?';
+    }
+
     // Mapping of font size to font data and bytes per character
     struct FontInfo {
         const unsigned char* data;
