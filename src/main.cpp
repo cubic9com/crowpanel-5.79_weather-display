@@ -160,7 +160,7 @@ void displayWeatherForecast()
       
       // Display Time
       memset(buffer, 0, sizeof(buffer));
-      snprintf(buffer, sizeof(buffer), "%s ", hourlyForecasts[i].time);
+      snprintf(buffer, sizeof(buffer), "%s ", hourlyForecasts[i].time.c_str());
       EPD_ShowString(26 + baseX, 18, buffer, 44, BLACK);
 
       // Display Weather Icon
@@ -358,7 +358,7 @@ String httpGETRequest(const char* url) {
  * @param OpenWeatherMapIcon OpenWeatherMap icon code (e.g., "01d")
  * @return Corresponding internal icon number
  */
-int getWeatherIconNum(String OpenWeatherMapIcon) {
+int getWeatherIconNum(const String& OpenWeatherMapIcon) {
   // Search for a Match from the Mapping Table
   if (WEATHER_MAPPINGS.find(OpenWeatherMapIcon) != WEATHER_MAPPINGS.end()) {
     return WEATHER_MAPPINGS[OpenWeatherMapIcon];
@@ -366,7 +366,7 @@ int getWeatherIconNum(String OpenWeatherMapIcon) {
   
   // Default is Cloudy if no match found
   Serial.println("Warning: No icon match found for " + OpenWeatherMapIcon + ", using default");
-  return ICON_THUNDERSTORM;
+  return ICON_CLOUDS;
 }
 
 /**
@@ -378,7 +378,7 @@ int getWeatherIconNum(String OpenWeatherMapIcon) {
  * @param temperature Temperature
  * @param pop Probability of precipitation
  */
-void storeWeatherInfo(int index, long unixTime, String iconCode, float temperature, float pop) {
+void storeWeatherInfo(int index, long unixTime, const String& iconCode, float temperature, float pop) {
   if (index < 0 || index >= FORECAST_COUNT) {
     displayErrorMessage("Invalid forecast index");
     enterDeepSleep(true);
