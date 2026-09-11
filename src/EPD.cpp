@@ -68,56 +68,23 @@ void Paint_Clear(uint8_t Color)
 *******************************************************************/
 void Paint_SetPixel(uint16_t Xpoint, uint16_t Ypoint, uint16_t Color)
 {
-    uint16_t X, Y;
-    uint32_t Addr;
-    uint8_t Rdata;
-    switch (Paint.rotate)
+    // Rotation is fixed to 0 (EPD.h: #define Rotation 0).
+    // The 90/180/270-degree branches have been removed as dead code.
+    // The +8 offset compensates for the 8-column gap at the junction
+    // of the two cascaded SSD1683 controller ICs.
+    if (Xpoint >= 396)
     {
-    case 0:
-        if (Xpoint >= 396)
-        {
-            Xpoint += 8;
-        }
-        X = Xpoint;
-        Y = Ypoint;
-        break;
-    case 90:
-        if (Ypoint >= 396)
-        {
-            Ypoint += 8;
-        }
-        X = Paint.widthMemory - Ypoint - 1;
-        Y = Xpoint;
-        break;
-    case 180:
-        if (Xpoint >= 396)
-        {
-            Xpoint += 8;
-        }
-        X = Paint.widthMemory - Xpoint - 1;
-        Y = Paint.heightMemory - Ypoint - 1;
-        break;
-
-    case 270:
-        if (Ypoint >= 396)
-        {
-            Ypoint += 8;
-        }
-        X = Ypoint;
-        Y = Paint.heightMemory - Xpoint - 1;
-        break;
-    default:
-        return;
+        Xpoint += 8;
     }
-    Addr = X / 8 + Y * Paint.widthByte;
-    Rdata = Paint.Image[Addr];
+    uint32_t Addr = Xpoint / 8 + Ypoint * Paint.widthByte;
+    uint8_t Rdata = Paint.Image[Addr];
     if (Color == BLACK)
     {
-        Paint.Image[Addr] = Rdata & ~(0x80 >> (X % 8)); // Set the corresponding data bit to 0
+        Paint.Image[Addr] = Rdata & ~(0x80 >> (Xpoint % 8)); // Set bit to 0
     }
     else
     {
-        Paint.Image[Addr] = Rdata | (0x80 >> (X % 8)); // Set the corresponding data bit to 1
+        Paint.Image[Addr] = Rdata | (0x80 >> (Xpoint % 8));  // Set bit to 1
     }
 }
 
