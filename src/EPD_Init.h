@@ -1,7 +1,7 @@
 #ifndef _EPD_INIT_H_
 #define _EPD_INIT_H_
 
-#include "spi.h"
+#include "epd_spi.h"
 
 // Since the 5.97 Inch E-Paper screen is controlled by two SSD1683 ICs,
 // and the resolution of SSD1683 is 400x300, the resolution of E-Paper is 792x272.

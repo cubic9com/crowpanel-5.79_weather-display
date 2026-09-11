@@ -172,104 +172,91 @@ void EPD_SetRAMSA(void)
 
 void EPD_Clear_R26A6H(void)
 {
-  uint16_t i, j;
+  uint32_t n;
   EPD_SetRAMMA();
   EPD_WR_REG(0x26);
-  for (i = 0; i < Gate_BITS; i++)
-  {
-    for (j = 0; j < Source_BYTES; j++)
-    {
-      EPD_WR_DATA8(0xFF);
-    }
-  }
+  EPD_WR_DATA_Begin();
+  for (n = 0; n < (uint32_t)Gate_BITS * Source_BYTES; n++)
+    EPD_WR_DATA_Byte(0xFF);
+  EPD_WR_DATA_End();
+
   EPD_SetRAMSA();
   EPD_WR_REG(0xA6);
-  for (i = 0; i < Gate_BITS; i++)
-  {
-    for (j = 0; j < Source_BYTES; j++)
-    {
-      EPD_WR_DATA8(0xFF);
-    }
-  }
+  EPD_WR_DATA_Begin();
+  for (n = 0; n < (uint32_t)Gate_BITS * Source_BYTES; n++)
+    EPD_WR_DATA_Byte(0xFF);
+  EPD_WR_DATA_End();
 }
 
 void EPD_Display_Clear(void)
 {
-  uint16_t i, j;
+  uint32_t n;
+  const uint32_t total = (uint32_t)Gate_BITS * Source_BYTES;
+
   EPD_SetRAMMP();
   EPD_SetRAMMA();
   EPD_WR_REG(0x24);
-  for (i = 0; i < Gate_BITS; i++)
-  {
-    for (j = 0; j < Source_BYTES; j++)
-    {
-      EPD_WR_DATA8(0xFF);
-    }
-  }
+  EPD_WR_DATA_Begin();
+  for (n = 0; n < total; n++) EPD_WR_DATA_Byte(0xFF);
+  EPD_WR_DATA_End();
+
   EPD_SetRAMMA();
   EPD_WR_REG(0x26);
-  for (i = 0; i < Gate_BITS; i++)
-  {
-    for (j = 0; j < Source_BYTES; j++)
-    {
-      EPD_WR_DATA8(0x00);
-    }
-  }
+  EPD_WR_DATA_Begin();
+  for (n = 0; n < total; n++) EPD_WR_DATA_Byte(0x00);
+  EPD_WR_DATA_End();
+
   EPD_SetRAMSP();
   EPD_SetRAMSA();
   EPD_WR_REG(0xA4);
-  for (i = 0; i < Gate_BITS; i++)
-  {
-    for (j = 0; j < Source_BYTES; j++)
-    {
-      EPD_WR_DATA8(0xFF);
-    }
-  }
+  EPD_WR_DATA_Begin();
+  for (n = 0; n < total; n++) EPD_WR_DATA_Byte(0xFF);
+  EPD_WR_DATA_End();
+
   EPD_SetRAMSA();
   EPD_WR_REG(0xA6);
-  for (i = 0; i < Gate_BITS; i++)
-  {
-    for (j = 0; j < Source_BYTES; j++)
-    {
-      EPD_WR_DATA8(0x00);
-    }
-  }
+  EPD_WR_DATA_Begin();
+  for (n = 0; n < total; n++) EPD_WR_DATA_Byte(0x00);
+  EPD_WR_DATA_End();
 }
 
 void EPD_Display(const uint8_t *ImageBW)
 {
   uint32_t i;
-  uint8_t tempOriginal;
   uint32_t tempcol = 0;
   uint32_t templine = 0;
+
   EPD_SetRAMMP();
   EPD_SetRAMMA();
   EPD_WR_REG(0x24);
+  EPD_WR_DATA_Begin();
   for (i = 0; i < ALLSCREEN_BYTES; i++)
   {
-    tempOriginal = *(ImageBW + templine * Source_BYTES * 2 + tempcol);
+    EPD_WR_DATA_Byte(*(ImageBW + templine * Source_BYTES * 2 + tempcol));
     templine++;
     if (templine >= Gate_BITS)
     {
       tempcol++;
       templine = 0;
     }
-    EPD_WR_DATA8(tempOriginal);
   }
+  EPD_WR_DATA_End();
+
   EPD_SetRAMSP();
   EPD_SetRAMSA();
   EPD_WR_REG(0xa4); // write RAM for black(0)/white (1)
+  EPD_WR_DATA_Begin();
   for (i = 0; i < ALLSCREEN_BYTES; i++)
   {
-    tempOriginal = *(ImageBW + templine * Source_BYTES * 2 + tempcol);
+    EPD_WR_DATA_Byte(*(ImageBW + templine * Source_BYTES * 2 + tempcol));
     templine++;
     if (templine >= Gate_BITS)
     {
       tempcol++;
       templine = 0;
     }
-    EPD_WR_DATA8(tempOriginal);
   }
+  EPD_WR_DATA_End();
 }
 
 // Horizontal scanning, from right to left, from bottom to top
@@ -301,23 +288,24 @@ void EPD_WhiteScreen_ALL_Fast(const unsigned char *datas)
 
   EPD_READBUSY();
   EPD_WR_REG(0x24); // write RAM for black(0)/white (1)
+  EPD_WR_DATA_Begin();
   for (i = 0; i < Source_BYTES * Gate_BITS; i++)
   {
-    tempOriginal = *(datas + templine * Source_BYTES * 2 + tempcol);
+    EPD_WR_DATA_Byte(~(*(datas + templine * Source_BYTES * 2 + tempcol)));
     templine++;
     if (templine >= Gate_BITS)
     {
       tempcol++;
       templine = 0;
     }
-    EPD_WR_DATA8(~tempOriginal);
   }
+  EPD_WR_DATA_End();
 
   EPD_WR_REG(0x26); // write RAM for black(0)/white (1)
+  EPD_WR_DATA_Begin();
   for (i = 0; i < Source_BYTES * Gate_BITS; i++)
-  {
-    EPD_WR_DATA8(0X00);
-  }
+    EPD_WR_DATA_Byte(0x00);
+  EPD_WR_DATA_End();
 
   EPD_WR_REG(0x91);
   EPD_WR_DATA8(0x04);
@@ -343,23 +331,24 @@ void EPD_WhiteScreen_ALL_Fast(const unsigned char *datas)
   tempcol = tempcol - 1; // Byte dislocation processing
   templine = 0;
   EPD_WR_REG(0xa4); // write RAM for black(0)/white (1)
+  EPD_WR_DATA_Begin();
   for (i = 0; i < Source_BYTES * Gate_BITS; i++)
   {
-    tempOriginal = *(datas + templine * Source_BYTES * 2 + tempcol);
+    EPD_WR_DATA_Byte(~(*(datas + templine * Source_BYTES * 2 + tempcol)));
     templine++;
     if (templine >= Gate_BITS)
     {
       tempcol++;
       templine = 0;
     }
-    EPD_WR_DATA8(~tempOriginal);
   }
+  EPD_WR_DATA_End();
 
   EPD_WR_REG(0xa6); // write RAM for black(0)/white (1)
+  EPD_WR_DATA_Begin();
   for (i = 0; i < Source_BYTES * Gate_BITS; i++)
-  {
-    EPD_WR_DATA8(0X00);
-  }
+    EPD_WR_DATA_Byte(0x00);
+  EPD_WR_DATA_End();
 
   EPD_FastUpdate();
 }
