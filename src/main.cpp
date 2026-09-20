@@ -498,8 +498,8 @@ String fetchWeatherData(bool useTestData = TEST_MODE) {
         break;
       default:
         exitLoop = true;
-        char numchar[10];
-        std::sprintf(numchar, "Unknown Error. httpResponseCode: %d", httpResponseCode);
+        char numchar[64];
+        std::snprintf(numchar, sizeof(numchar), "Unknown Error. httpResponseCode: %d", httpResponseCode);
         displayErrorMessage(numchar);
         enterDeepSleep(false);
         break;
