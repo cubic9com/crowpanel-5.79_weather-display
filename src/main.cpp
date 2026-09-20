@@ -487,6 +487,8 @@ String fetchWeatherData(bool useTestData = TEST_MODE) {
       case HTTP_CODE_BAD_GATEWAY:
       case HTTP_CODE_SERVICE_UNAVAILABLE:
       case HTTP_CODE_GATEWAY_TIMEOUT:
+      case HTTPC_ERROR_CONNECTION_REFUSED:
+      case HTTPC_ERROR_CONNECTION_LOST:
       case HTTPC_ERROR_READ_TIMEOUT:
         Serial.println("Unexpected Error.");
         retryCount++;
