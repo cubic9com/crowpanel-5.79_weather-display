@@ -189,7 +189,7 @@ This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), 
     code .
     ```
 
-1. Install `PlatformIO IDE` extension:
+1. Install the `PlatformIO IDE` extension:
     - Go to the Extensions view (`Ctrl+Shift+X`).
     - Search for `PlatformIO IDE` and install it.
 
