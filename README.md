@@ -13,8 +13,8 @@
 
 # Overview / 概要
 
-This project is a weather forecast display system that uses [Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays weather forecast at 3-hour intervals for the next 12 hours.
-The weather forecast data is retrieved via [OpenWeatherMap](https://openweathermap.org/) API.
+This project is a weather forecast display system that uses [Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays weather the forecast at 3-hour intervals for the next 12 hours.
+The weather forecast data is retrieved via the [OpenWeatherMap](https://openweathermap.org/) API.
 
 \[日本語\]
 
@@ -91,7 +91,7 @@ This system uses [One Call API 3.0](https://openweathermap.org/api/one-call-3), 
 
 1. Open the [OpenWeatherMap website](https://openweathermap.org/).
 
-1. Click "Sign in" at the top right corner.
+1. Click "Sign in" in the top-right corner.
 
 1. Click "Create an Account".
 
