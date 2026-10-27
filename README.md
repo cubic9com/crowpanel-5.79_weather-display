@@ -13,7 +13,7 @@
 
 # Overview / 概要
 
-This project is a weather forecast display system that uses [Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays weather the forecast at 3-hour intervals for the next 12 hours.
+This project is a weather forecast display system that uses [Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays the weather forecast at 3-hour intervals for the next 12 hours.
 The weather forecast data is retrieved via the [OpenWeatherMap](https://openweathermap.org/) API.
 
 \[日本語\]
