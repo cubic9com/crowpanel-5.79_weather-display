@@ -45,7 +45,7 @@ By using an E-Paper display, the system becomes not only easy to read but also e
 The system operates as follows:
 
 1. Connects to a 2.4 GHz WiFi network on startup.
-1. Retrieves the current weather and forecast (3, 6, 9, and 12 hours ahead) via [OpenWeatherMap](https://openweathermap.org/) API.
+1. Retrieves the current weather and forecast (3, 6, 9, and 12 hours ahead) via the [OpenWeatherMap](https://openweathermap.org/) API.
 1. Displays weather information (time, weather condition, temperature, and probability of precipitation) on the E-Paper display.
 1. Enters [Deep-sleep mode](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/system/sleep_modes.html) to save power.
 1. Restarts after the configured interval (default: 1 hour).
@@ -317,7 +317,7 @@ By using this project, you agree to assume full responsibility for any and all o
 
 # Related Projects / 関連プロジェクト
 
-- [FontGen4LCDandEPD](https://github.com/cubic9com/FontGen4LCDandEPD): A lightweight Python script that converts TrueType fonts into C-style byte array for use on LCD and EPD (e-paper) modules in embedded systems. It is intended as a simplified alternative to PCtoLCD2002.
+- [FontGen4LCDandEPD](https://github.com/cubic9com/FontGen4LCDandEPD): A lightweight Python script that converts TrueType fonts into a C-style byte array for use on LCD and EPD (e-paper) modules in embedded systems. It is intended as a simplified alternative to PCtoLCD2002.
 
 \[日本語\]
 
