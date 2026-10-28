@@ -13,14 +13,13 @@
 
 # Overview / 概要
 
-This project is a weather forecast display system that uses [Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html). It displays the weather forecast at 3-hour intervals for the next 12 hours.
-The weather forecast data is retrieved via the [OpenWeatherMap](https://openweathermap.org/) API.
+A weather board your kids can check by themselves — the next 12 hours at a glance, no smartphone required. Built on [Elecrow's CrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html), it retrieves forecast data via the [OpenWeatherMap](https://openweathermap.org/) API and displays the forecast at 3-hour intervals.
 
 \[日本語\]
 
-このプロジェクトは、天気予報表示システムです。12時間後までの3時間ごとの天気予報を表示します。
-ハードウェアは [ElecrowのCrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html) を使っています。
-天気予報データは、[OpenWeatherMap](https://openweathermap.org/) APIにて取得します。
+子どもが自分で天気を確認できる、スマホいらずの天気予報表示システム。今後12時間の天気予報をひと目でチェックできます。
+
+[ElecrowのCrowPanel ESP32 E-Paper HMI 5.79-inch Display](https://www.elecrow.com/crowpanel-esp32-5-79-e-paper-hmi-display-with-272-792-resolution-black-white-color-driven-by-spi-interface.html)を使い、[OpenWeatherMap](https://openweathermap.org/) APIから取得した天気予報を3時間ごとに表示します。
 
 # Photos / 写真
 
